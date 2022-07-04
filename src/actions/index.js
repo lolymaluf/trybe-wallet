@@ -30,7 +30,6 @@ export const saveFormData = (formData) => ({
 
 export const pegaTodoThunk = (formData) => async (dispatch) => {
   const data = await fetchCurrencyAPI();
-  console.log(data);
   formData.exchangeRates = data;
   dispatch(saveFormData(formData));
 };
