@@ -49,7 +49,7 @@ class Table extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  expenses: state.wallet.despesas,
+  expenses: state.wallet.expenses,
 });
 
 Table.propTypes = {
