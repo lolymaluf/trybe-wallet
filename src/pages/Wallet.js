@@ -2,12 +2,22 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
-import { pegaThunk } from '../actions/index';
+import { pegaThunk, pegaTodoThunk } from '../actions/index';
+import Table from '../components/Table';
 
 class Wallet extends React.Component {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(pegaThunk());
+  }
+
+  saveFormData = (event) => {
+    event.preventDefault();
+    const saveData = new FormData(event.target);
+    const data = Object.fromEntries(saveData);
+    const { dispatch } = this.props;
+    dispatch(pegaTodoThunk(data));
+    event.target.reset();
   }
 
   render() {
@@ -16,15 +26,18 @@ class Wallet extends React.Component {
       <div>
         <Header />
         TrybeWallet
-        <form>
+        <form
+          onSubmit={ this.saveFormData }
+        >
           <input
             data-testid="value-input"
             type="number"
-            name="despesas"
+            name="value"
           />
           <input
             data-testid="description-input"
             type="text"
+            name="description"
           />
           <label htmlFor="currency-types">
             Moeda
@@ -58,6 +71,13 @@ class Wallet extends React.Component {
               <option value="Transporte">Transporte</option>
               <option value="Saúde">Saúde</option>
             </select>
+            <button
+              type="submit"
+            >
+              Adicionar despesa
+
+            </button>
+            <Table />
 
           </label>
         </form>
@@ -71,7 +91,7 @@ const mapStateToProps = (state) => ({
 });
 
 Wallet.propTypes = {
-  dispatch: PropTypes.func,
+  /* dispatch: PropTypes.func, */
   recebeMoeda: PropTypes.array,
 }.isRequired;
 
