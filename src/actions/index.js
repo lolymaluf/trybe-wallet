@@ -1,5 +1,5 @@
 // Coloque aqui suas actions
-import fetchCurrencyAPI from '../tests/helpers/fetchCurrencyAPI';
+import fetchCurrencyAPI from '../helpers/fetchCurrencyAPI';
 
 export const PEGA_USUARIO = 'PEGA_USUARIO';
 export const INFO_CURRENCY = 'INFO_CURRENCY';
